@@ -90,6 +90,10 @@ body{
     visibility: hidden;
 }
 
+.form-control.error small {
+    visibility: visible;
+  }
+
 
 .form-control.error small {
     visibility: pointer;
