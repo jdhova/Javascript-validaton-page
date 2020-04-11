@@ -37,33 +37,37 @@ function checkRequired(inputArr,message){
     });
 };
 
-// function checkLength(input,min,max) {
-//     if (input.value.length < min) {
-//         showError(input, `${fieldName(input)} must be minimum ${min} characters` )
-//     } else  if (input.value.length > max) {
-//         showError(input,`${fieldName(input)} must be less than ${max} characters`)   
-//     } else {
-//         showSuccess(input)
-//     }
-// };
-
-
-
-function checkLength(input, min, max, message) {
+/// checck length
+function checkLength(input,min,max) {
     if (input.value.length < min) {
-      showError(
-        input,
-        `${fieldName(input)} must be at least ${min} characters`
-      );
-    } else if (input.value.length > max) {
-      showError(
-        input,
-        `${fieldName(input)} must be less than ${max} characters`
-      );
+        showError(input, `${fieldName(input)} must be minimum ${min} characters` );
+    } else  if (input.value.length > max) {
+        showError(input,`${fieldName(input)} must be less than ${max} characters`) ;  
     } else {
-      showSuccess(input);
+        showSuccess(input);
     }
+};
+
+//// check password match
+
+function checkPasswordMatch(input1,input2) {
+  if (input1.value !== input2.value) {
+      showError(input2,'Passwords must match')
+  } else{
+    showSuccess(input)
   }
+}
+
+/// check password 
+
+function checkPassword(inputtxt)  { 
+  const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  if(inputtxt.value.match(passw)) { 
+  showSuccess(inputtxt);
+  } else { 
+  showError(inputtxt,'Password must have Capital letter');}
+};
+
 
 
 function fieldName(input) {
@@ -84,6 +88,8 @@ form.addEventListener('submit', function (e) {
     checkRequired([username,email,password,password2]);
     checkLength(username, 3, 8);
     checkLength(password, 6, 10);
+    checkPasswordMatch(password,password2);
+    checkPassword(password)
 
 });
 
