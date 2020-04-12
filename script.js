@@ -3,16 +3,16 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 const form = document.getElementById('form');
+const loginform = document.getElementById('loginform');
+const loginusername = document.getElementById('loginusername');
+const loginpassword = document.getElementById('loginpassword');
 
 /// functions
 
-console.log('here now now')
 
 function showError(input,message) {
     const manipulateErrorlateDiv = input.parentElement; 
     manipulateErrorlateDiv.className = 'form-control error';
-    // const small = manipulateErrorlateDiv.querySelector('small');
-    // small.innerText = message;
     const small = manipulateErrorlateDiv.querySelector('small');
     small.innerText = message;
     
@@ -25,17 +25,33 @@ function showSuccess(input) {
     manipulateSuccesslateDiv.className = 'form-control success';
 };
 
-/// check required
+/// check required register
 
 function checkRequired(inputArr,message){
+
     inputArr.forEach(input => {
         if (input.value.trim() === '') {
+          
             showError(input,`${fieldName(input)} is required`)
-        } else  {
+        } else {
             showSuccess(input)
         }
     });
 };
+
+function checkRequiredLogin(inputArrLogin, message) {
+  console.log(inputArrLogin)
+
+  inputArrLogin.forEach(input => {
+  
+    if(input.value.trim() === '') {
+      console.log(input.value)
+      showError(input, `${fieldNameLogin(input)} must not be empty`)
+    } else {
+      showSuccess(input)
+    }
+  })
+}
 
 /// checck length
 function checkLength(input,min,max) {
@@ -46,6 +62,18 @@ function checkLength(input,min,max) {
     } else {
         showSuccess(input);
     }
+};
+
+
+
+function checkLoginLength(input,min,max) {
+  if (input.value.length < min) {
+      showError(input, `${fieldNameLogin(input)} must be minimum ${min} characters` );
+  } else  if (input.value.length > max) {
+      showError(input,`${fieldNameLogin(input)} must be less than ${max} characters`) ;  
+  } else {
+      showSuccess(input);
+  }
 };
 
 //// check password match
@@ -74,10 +102,13 @@ function fieldName(input) {
     return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 };
 
-// 
+
+function fieldNameLogin(input) {
+  return input.id.charAt(0).toUpperCase() + input.id.slice(1,5) + " " + input.id.charAt(5).toUpperCase() + input.id.slice(6);
+};
+ 
 
 // Add events Listner
-
 
 form.addEventListener('submit', function (e) {
 
@@ -92,6 +123,16 @@ form.addEventListener('submit', function (e) {
     checkPassword(password)
 
 });
+
+loginform.addEventListener('submit',function(e) {
+      e.preventDefault(e)
+      checkRequiredLogin([loginusername,loginpassword]);
+      checkLoginLength(loginusername, 3, 8);
+      checkLoginLength(loginpassword, 6, 10);
+
+     
+      
+})
 
 
 

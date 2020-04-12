@@ -30,11 +30,34 @@ body{
     padding: 30px 40px;
 }
 
+
+.main-container {
+display: flex;
+/* justify-content: space-around; */
+/* justify-self: left */
+  
+
+}
+
+.container2 {
+    background-color: sandybrown;
+    width: 400px;
+    border-radius: 2px;
+    box-shadow: tan;
+   
+}
+
+.container2 h2 {
+    align-items: center;
+ 
+ }
+
 .container {
     background-color: snow;
     width: 400px;
     border-radius: 2px;
     box-shadow: tan;
+
 
 }
 
@@ -49,6 +72,7 @@ body{
     position: relative;
 
 }
+
 
 .form-control label {
     color: #777;
